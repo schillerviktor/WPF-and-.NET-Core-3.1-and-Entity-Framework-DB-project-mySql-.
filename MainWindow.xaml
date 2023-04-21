@@ -1,0 +1,84 @@
+﻿<Window x:Class="Tanulok.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Tanulok"
+        mc:Ignorable="d"
+        Title="Hallgató adatok" Height="400" Width="900" Loaded="Window_Loaded"
+        >
+    <Window.Background>
+        <ImageBrush ImageSource="/desktop-800x450.jpg"/> <!-- Ablak háttere (.jpg) -->
+    </Window.Background>
+    <Grid>
+        <Grid.Background>
+            <ImageBrush/>
+        </Grid.Background>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+        <GroupBox Header="Keresés" Margin="5" Foreground="#FFFFFDFD"> <!-- Kereső mező kialakítása -->
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition MinWidth="120" MaxWidth="250"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
+
+                <Label Content= "NEPTUN kód:" Foreground="#FFFFFDFD"/> <!-- Keresési mezők és címke -->
+                <Label Content="Szervezeti Egység:" Grid.Row="1" Foreground="#FFFFFDFD"/>
+
+                <TextBox x:Name="txtNeptun" Text="" Grid.Column="1" Margin="0,5,0,5" />
+                <ComboBox x:Name="cboSzervezetiEgyseg" Grid.Column="1" Margin="0,5,0,5" Grid.Row="1" DisplayMemberPath="SZeNev"/>
+
+                <WrapPanel Grid.Column="2" Grid.RowSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <Button x:Name="btnKeres" Content="Keresés" Height="30" Width="120" Margin="0,0,10,0" Click="btnKeres_Click" Foreground="#FFFDFBFB" BorderBrush="#FF02F982">
+                        <Button.Background>
+                            <ImageBrush/>
+                        </Button.Background>
+                    </Button>
+                    <Button x:Name="btnFeltTorlese" Content="Feltételek törlése" Height="30" Width="120" Margin="10,0,0,0" Click="btnFeltTorlese_Click" Foreground="#FFFDFBFB" BorderBrush="#FF02F982">
+                        <Button.Background>
+                            <ImageBrush/>
+                        </Button.Background>
+                    </Button>
+                </WrapPanel>
+            </Grid>
+        </GroupBox>
+
+        <DataGrid x:Name="dgLista" Grid.Row="1" Margin="5" IsReadOnly="True" AutoGenerateColumns="False"> <!-- Adattábla, Az adatok megjelenítésére szolgáló DataGrid -->
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="NEPTUN kód" Width="120" Binding="{Binding NEPTUNKod}"/>
+                <DataGridTextColumn Header="Név" Width="180" Binding="{Binding Nev}"/>
+                <DataGridTextColumn Header="Szervezeti egység" Width="200" Binding="{Binding SzervezetiEgyseg.SZeNev}"/>
+                <DataGridTextColumn Header="Aktuális félév" Width="100" Binding="{Binding AktualFelev}"/>
+                <DataGridTextColumn Header="Tagozat" Width="120" Binding="{Binding Tagozat.TagozatNev}"/>
+                <DataGridTextColumn Header="Felvétel dátuma" Width="120" Binding="{Binding FelvetelDatuma, StringFormat=yyyy.MM.dd}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <WrapPanel Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10"> <!-- A gombokat tartalmazó WrapPanel -->
+            <Button x:Name="btnUj" Content="Új tanuló" Height="30" Width="120" Margin="0,0,10,0" Click="btnUj_Click" Foreground="#FFFDFBFB" BorderBrush="#FF02F982">
+                <Button.Background>
+                    <ImageBrush/>
+                </Button.Background>
+            </Button>
+            <Button x:Name="btnModositas" Content="Módosítás" Height="30" Width="120" Margin="10,0,10,0" Click="btnModositas_Click" Foreground="#FFFDFBFB" BorderBrush="#FF02F982">
+                <Button.Background>
+                    <ImageBrush/>
+                </Button.Background>
+            </Button>
+            <Button x:Name="btnTorles" Content="Törlés" Height="30" Width="120" Margin="10,0,0,0" Click="btnTorles_Click" Foreground="#FFFDFBFB" BorderBrush="#FF02F982">
+                <Button.Background>
+                    <ImageBrush/>
+                </Button.Background>
+            </Button>
+        </WrapPanel>
+    </Grid>
+</Window>
